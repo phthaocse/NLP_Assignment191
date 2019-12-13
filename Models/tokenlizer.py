@@ -2,7 +2,7 @@ import re
 import unicodedata as ud
 from utils import loadDict 
 
-special_word = {'thành phố','xe bus', 'xe buýt', 'xe'}
+
 
 class Basetokenizer(object):
     def tokenize(self,text):
@@ -89,8 +89,35 @@ class Tokenizer(Basetokenizer):
                     res.append(curr_word)
                     index += 1
         return res
-
+    
+    def busTokenize(self,syllables):
+        """
+        segment sentence according bus db 
+        param syllables (output of tokenize)
+        return new list of syllables
+        """
+        print(syllables)
+        special_word = ['thành phố','xe bus', 'xe buýt', 'xe khách', 'xe']
+        bus_id = ['b1','b2','b3','b4']
+        city_name = ['hồ chí minh', 'đà nẵng', 'huế', 'hà nội']
+        index = 0
+        while (index < len(syllables) - 1):
+            curr_word = syllables[index].lower()
+            if curr_word in special_word:
+                next_word = syllables[index + 1].lower()
+                if curr_word != special_word[0]:
+                    print(curr_word + ' ' + next_word)
+                    if next_word in bus_id or re.match('\d+',next_word):
+                        print(syllables[index:(index+1)])
+                        syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
+                else:
+                    if next_word in city_name:
+                        syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
+            index += 1
+        return syllables
+            
 toknenize_obj = Tokenizer()
 sentence = 'Thời gian xe bus B3 từ Đà Nẵng đến Huế'
 token = toknenize_obj.tokenize(sentence)
-print(token)
+segmented = toknenize_obj.busTokenize(token)
+print(segmented)
