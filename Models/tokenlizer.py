@@ -50,8 +50,8 @@ class Basetokenizer(object):
         return [token[0] for token in tokens]
 
 class Tokenizer(Basetokenizer):
-    def __init__(self,complex_words = 'complexwords.txt',complex_words_special = 'complexwordsspec.txt'):
-        self.complexWords = list(loadDict(complex_words)) + list(loadDict(complex_words_special))
+    def __init__(self,complex_words = 'complexwords.txt'):
+        self.complexWords = loadDict(complex_words)
 
     def tokenize(self,text):
         """
@@ -75,13 +75,21 @@ class Tokenizer(Basetokenizer):
             else:
                 next_word = syllables[index + 1]
                 complex2words = ' '.join([curr_word.lower(), next_word.lower()])
+                if index < syl_size - 3:
+                    next_word2nd = syllables[index + 2]
+                    next_word3rd = syllables[index + 3]
+                    complex4words = ' '.join([complex2words,next_word2nd.lower(),next_word3rd.lower()])
+                    if complex4words in self.complexWords:
+                        res.append(' '.join([curr_word,next_word,next_word2nd,next_word3rd]))
+                        index += 4
+                        continue                    
                 if index < syl_size - 2:
                     next_word2nd = syllables[index + 2]
                     complex3words = ' '.join([complex2words,next_word2nd.lower()])
                     if complex3words in self.complexWords:
                         res.append(' '.join([curr_word,next_word,next_word2nd]))
                         index += 3
-                        break
+                        continue
                 if complex2words in self.complexWords:
                     res.append(' '.join([curr_word, next_word]))
                     index += 2
@@ -90,34 +98,46 @@ class Tokenizer(Basetokenizer):
                     index += 1
         return res
     
-    def busTokenize(self,syllables):
+    def finalTokenize(self,syllables):
         """
-        segment sentence according bus db 
+        final phase of tokenize
         param syllables (output of tokenize)
         return new list of syllables
         """
         print(syllables)
-        special_word = ['thành phố','xe bus', 'xe buýt', 'xe khách', 'xe']
-        bus_id = ['b1','b2','b3','b4']
+        special_word = ['thành phố']
+        special_word_time = ['lúc','vào lúc','vào thời điểm','thời điểm']
         city_name = ['hồ chí minh', 'đà nẵng', 'huế', 'hà nội']
         index = 0
         while (index < len(syllables) - 1):
             curr_word = syllables[index].lower()
             if curr_word in special_word:
                 next_word = syllables[index + 1].lower()
-                if curr_word != special_word[0]:
-                    print(curr_word + ' ' + next_word)
-                    if next_word in bus_id or re.match('\d+',next_word):
-                        print(syllables[index:(index+1)])
-                        syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
-                else:
-                    if next_word in city_name:
-                        syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
+                if next_word in city_name:
+                    syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
+            elif curr_word in special_word_time:
+                next_word = syllables[index + 1]
+                if re.match("\d+(:\d+)+HR",next_word):
+                    syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
             index += 1
         return syllables
-            
-toknenize_obj = Tokenizer()
-sentence = 'Thời gian xe bus B3 từ Đà Nẵng đến Huế'
-token = toknenize_obj.tokenize(sentence)
-segmented = toknenize_obj.busTokenize(token)
-print(segmented)
+
+def test(sentence,expect_out):            
+    toknenize_obj = Tokenizer()
+    success = 0
+    for i in range(len(sentence)):
+        token = toknenize_obj.tokenize(sentence[i])
+        segmented = toknenize_obj.finalTokenize(token)
+        segmented = '[' + ','.join([x for x in segmented]) + ']'
+        expect = '[' + ','.join([x for x in expect_out[i]]) + ']'
+        if not segmented == expect:
+            print("Test " + str(i) + " false")
+            print("out:    " + segmented)
+            print("expect: " + expect)
+        else:
+            success += 1
+    print("Run " + str(success) + " testcase successed")
+
+if __name__ == "__main__":
+    import sentence_test
+    test(sentence_test.sentence,sentence_test.expect_output)
