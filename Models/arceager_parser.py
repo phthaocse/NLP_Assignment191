@@ -2,10 +2,35 @@ from queue import LifoQueue
 class ArcEagerParser():
     def __init__(self,word_list):
         self.stack = ['root']
-        self.buffer = word_list[::-1]
+        self.buffer = self.preProcess(word_list)
         self.relation = dict()
         for x in word_list:
             self.relation[x] = []
+
+    def preProcess(self,word_list):
+        res = list()
+        for x in word_list:
+            if x[1] != 'None':
+                res += [x]
+        return res[::-1]
+
+
+    def checkRule(self,out,inp):
+        rule = ""
+        isValid = False
+        if out == 'root':
+            if inp == 'V':
+                rule = 'ROOT'
+                isValid = True
+        if out[1] == 'V':
+            if inp[1] == "N_sub":
+                rule = 'nsubj'
+                isValid = True
+            elif inp[1] == 'WH_time':
+                rule = 'nmod'
+                isValid = True
+
+        return isValid, rule
 
     def parsing(self):
         print(self.buffer)
@@ -36,12 +61,13 @@ class ArcEagerParser():
             print(self.stack)
         
 
+
 def test():
-    word_list = ['Happy','children','like','to','play','with','their','friends']
+    word_list = [('Hãy cho biết', 'None'), ('xe bus', 'N'), ('B2', 'Name'), ('đến', 'V'), ('thành phố Hà Nội', 'Name'), ('vào thời điểm nào', 'WH_time'), ('?', 'None')]
     dependency_gram = ArcEagerParser(word_list)
-    print(dependency_gram.relation)
-    dependency_gram.parsing()
-    print(dependency_gram.relation)
+    print(dependency_gram.buffer)
+    # dependency_gram.parsing()
+    # print(dependency_gram.relation)
 
 if __name__ == "__main__":
     test()

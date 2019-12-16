@@ -8,14 +8,20 @@ class PosTag():
         self.dict = pos_tag_dict
     
     def tagging(self):
-        res = dict()
+        res = list()
         for word in self.word_list:
             if word.lower() in self.dict.keys():
-                res[word] = self.dict[word.lower()]
+                if word.lower() == "đến":
+                    if "từ" in self.word_list:
+                        res.append((word,'P'))
+                    else:
+                        res.append((word,'V'))
+                else:
+                    res.append((word,self.dict[word.lower()]))
             elif re.search("(\d+(:\d+)+HR)", ud.normalize("NFC",word), re.UNICODE):
-                res[word] = "Time"
+                res.append((word,"Time"))
             else:
-                res[word] = "None"
+                res.append((word,"None"))
         return res
 
 def test(word_list):
