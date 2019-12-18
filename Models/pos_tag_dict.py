@@ -1,6 +1,6 @@
 pos_tag_dict = {
     "đi"                    :   "V",
-    "đến"                   :   ("V","P"),
+    "đến"                   :   "V",
     "đi đến"                :   "V",
     "đà nẵng"               :   "Name",
     "hồ chí minh"           :   "Name",

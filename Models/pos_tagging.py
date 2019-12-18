@@ -11,13 +11,7 @@ class PosTag():
         res = list()
         for word in self.word_list:
             if word.lower() in self.dict.keys():
-                if word.lower() == "đến":
-                    if "từ" in self.word_list:
-                        res.append((word,'P'))
-                    else:
-                        res.append((word,'V'))
-                else:
-                    res.append((word,self.dict[word.lower()]))
+                res.append((word,self.dict[word.lower()]))
             elif re.search("(\d+(:\d+)+HR)", ud.normalize("NFC",word), re.UNICODE):
                 res.append((word,"Time"))
             else:
