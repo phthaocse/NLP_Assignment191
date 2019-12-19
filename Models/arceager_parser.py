@@ -25,12 +25,12 @@ class ArcEagerParser():
                 rule = 'nsubj'
             elif inp[1] == 'Name':
                 rule = 'dobj'
-            elif inp[1] == 'WH_time':
+            elif inp[1] == 'WH_time' or inp[1] == 'Time':
                 rule = 'nmod'
         elif out[1] == 'N_sub':
             if inp[1] == 'Name':
                 rule = 'nmod'
-            elif inp[1] == 'Name_bus':
+            elif inp[1] == 'Name_bus' or inp[1] == 'WH':
                 rule = 'amod'
         elif out[1] == 'Name':
             if inp[1] == 'P':
@@ -95,8 +95,16 @@ class ArcEagerParser():
 
 
 def test():
-    word_list = [('Hãy cho biết', 'None'), ('xe bus', 'N_sub'), ('B2', 'Name_bus'), ('đến', 'V'), ('thành phố Hà Nội', 'Name'), ('vào thời điểm nào', 'WH_time'), ('?', 'None')]
-    dependency_gram = ArcEagerParser(word_list)
+    import tokenlizer 
+    import pos_tagging
+    sentence = "Xe bus nào đến thành phố Huế lúc 20:00HR?"
+    toknenize_obj = tokenlizer.Tokenizer()
+    token = toknenize_obj.tokenize(sentence)
+    word_list = toknenize_obj.finalTokenize(token)
+    postag = pos_tagging.PosTag(word_list)
+    pos_tag_res = postag.tagging()
+ 
+    dependency_gram = ArcEagerParser(pos_tag_res)
     print(dependency_gram.buffer)
     #print(dependency_gram.stack[-1])
     dependency_gram.parsing()
