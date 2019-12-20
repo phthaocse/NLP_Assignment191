@@ -140,3 +140,5 @@ dmypy.json
 
 test.py
 sentence.txt
+tree.py
+tree2.py
