@@ -131,9 +131,11 @@ class ArcEagerParser():
 def test():
     import tokenlizer 
     import pos_tagging
-    sentence = "Thời gian xe bus B3 từ Đà Nẵng đến Huế?"
+    sentence1 = "Xe bus nào đến thành phố Huế lúc 20:00HR?"
+    sentence2 = "Thời gian xe bus B3 từ Đà Nẵng đến Huế?"
+    sentence3 = "Xe bus nào đến thành phố Hồ Chí Minh ?"
     toknenize_obj = tokenlizer.Tokenizer()
-    token = toknenize_obj.tokenize(sentence)
+    token = toknenize_obj.tokenize(sentence1)
     word_list = toknenize_obj.finalTokenize(token)
     postag = pos_tagging.PosTag(word_list)
     pos_tag_res = postag.tagging()

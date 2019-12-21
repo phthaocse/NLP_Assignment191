@@ -21,7 +21,7 @@ class PosTag():
 def test(word_list):
     postag = PosTag(word_list)
     pos_tag_res = postag.tagging()
-    print(pos_tag_res)
+    print(pos_tag_res,'\n')
 
 if __name__ == "__main__":
     import sentence_test

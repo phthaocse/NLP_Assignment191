@@ -2,9 +2,9 @@ dict1 = {
     "đi"                    :   "di",
     "đến"                   :   "den",
     "đi đến"                :   "di den",
-    "đà nẵng"               :   "da nang",
-    "hồ chí minh"           :   "ho chi minh",
-    "hà nội"                :   "ha noi",
+    "đà nẵng"               :   "danang",
+    "hồ chí minh"           :   "hochiminh",
+    "hà nội"                :   "hanoi",
     "huế"                   :   "hue",
     "lúc"                   :   "WH_time",
     "vào lúc"               :   "WH_time",
@@ -29,3 +29,4 @@ dict1 = {
     "từ"                    :   "from",
     "vào thời điểm nào"     :   "WH_time",
 }
+

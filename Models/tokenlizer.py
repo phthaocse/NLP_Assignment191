@@ -115,29 +115,30 @@ class Tokenizer(Basetokenizer):
                 next_word = syllables[index + 1].lower()
                 if next_word in city_name:
                     syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
-            elif curr_word in special_word_time:
-                next_word = syllables[index + 1]
-                if re.match("\d+(:\d+)+HR",next_word):
-                    syllables[index:(index+2)] = [syllables[index] + ' ' + syllables[index+1]]
             index += 1
         return syllables
 
 def test(sentence,expect_out):            
     toknenize_obj = Tokenizer()
     success = 0
+    res = list()
     for i in range(len(sentence)):
         token = toknenize_obj.tokenize(sentence[i])
         segmented = toknenize_obj.finalTokenize(token)
+        res.append(segmented)
         segmented = '[' + ','.join([x for x in segmented]) + ']'
-        expect = '[' + ','.join([x for x in expect_out[i]]) + ']'
-        if not segmented == expect:
-            print("Test " + str(i) + " false")
-            print("out:    " + segmented)
-            print("expect: " + expect)
-        else:
-            success += 1
-    print("Run " + str(success) + " testcase successed")
+    #     expect = '[' + ','.join([x for x in expect_out[i]]) + ']'
+    #     if not segmented == expect:
+    #         print("Test " + str(i) + " false")
+    #         print("out:    " + segmented)
+    #         print("expect: " + expect)
+    #     else:
+    #         success += 1
+    # print("Run " + str(success) + " testcase successed")
+    return res
 
 if __name__ == "__main__":
     import sentence_test
-    test(sentence_test.sentence,sentence_test.expect_output)
+    res = test(sentence_test.sentence,sentence_test.expect_output)
+    for x in res:
+        print(x,'\n')
