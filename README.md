@@ -1,8 +1,8 @@
 # NLP_Assignment191
-##Thư mục Input chứa:
+## Thư mục Input chứa:
 - questions.txt: file đầu vào của các câu hỏi trong đề bài
 - dp.py: file lưu cơ sở dữ liệu của đề bài
-##Thư mục Output:
+## Thư mục Output:
 - Chứa các file output_a.txt, output_b.txt, output_c.txt, output_d.txt theo yêu cầu đề bài
 - format của các file output sẽ có dạng:
     Câu truy vấn được chia ra trong đề bài
