@@ -41,13 +41,14 @@ class LogicalForm():
 def test():
     l = [
         [('WH', 'XE_BUS'), ('DEST', 'b', ('NAME', 'h1', '"HUE"')), ('ATIME', 'b', '20:00HR')],
-        [('XE BUS', 'b3', '(NAME b3 "B3")'), ('FROM_LOC', 'b', ('NAME', 'd1', '"DANANG"')), ('WH', 'RUN_TIME'), ('DEST', 'b', ('NAME', 'h1', '"HUE"'))],
+        [('XE BUS', 'b3'), ('NAME','b3' ,'"B3"'), ('FROM_LOC', 'b', ('NAME', 'd1', '"DANANG"')), ('WH', 'RUN_TIME'), ('DEST', 'b', ('NAME', 'h1', '"HUE"'))],
         [('WH', 'XE_BUS'), ('DEST', 'b', ('NAME', 'h1', '"HCMC"'))]
     ]
     for ele in l:
         log_form = LogicalForm(ele)
         log_form.get_logical_form()
         log_form.print_logic_form()
+        print(log_form.logic_form)
 
 if __name__ == "__main__":
     test()

@@ -30,7 +30,7 @@ class GrammaticalRelation():
             if rule[2][1] == 'Name_bus':
                 var = self.var_gen(rule[2][0].lower(),'add') 
                 res = '(s1 LSUBJ ' + dict1[rule[1][0].lower()].upper() + '(NAME ' + var + ' "'+rule[2][0]+'"))'
-                logi = ('XE BUS',var,'(NAME ' + var + ' "' + rule[2][0]+'")')
+                logi = ('XE BUS',var,('NAME',var,'"' + rule[2][0] + '"'))
             else:
                 res = '(s1 LSUBJ ' + dict1[rule[1][0].lower()].upper() + ')(NAME ' + self.var_gen('WH_BUS') + ' WH_BUS)'
                 logi = ('WH','XE_BUS')
@@ -78,7 +78,7 @@ class GrammaticalRelation():
 def test():
     rule =  [[('ROOT', 'root', ('đến', 'V'), -2, 2), ('nsubj', ('đến', 'V'), ('Xe bus', 'N_sub'), -1, 0), ('amod', ('Xe bus', 'N_sub'), ('nào', 'WH'), 0, 1), ('dobj', ('đến', 'V'), ('thành phố Huế', 'Name'), 2, 3), ('nmod', ('đến', 'V'), ('20:00HR', 'Time'), 2, 5), ('case', ('thành phố Huế', 'Name'), ('lúc', 'P'), 3, 4)],
             [('ROOT', 'root', ('đến', 'V'), -2, 5), ('nsubj', ('đến', 'V'), ('xe bus', 'N_sub'), -1, 1), ('amod', ('xe bus', 'N_sub'), ('B3', 'Name_bus'), 1, 2), ('nmod', ('xe bus', 'N_sub'), ('Đà Nẵng', 'Name'), 1, 4), ('case', ('Đà Nẵng', 'Name'), ('từ', 'P'), 4, 3), ('nmod', ('đến', 'V'), ('Thời gian', 'WH_time'), 5, 0), ('dobj', ('đến', 'V'), ('Huế', 'Name'), 5, 6)],
-            [('WH', 'XE_BUS'), ('DEST', 'b', ('NAME', 'h1', '"HCMC"'))]
+            [('ROOT', 'root', ('đến', 'V'), -2, 2), ('nsubj', ('đến', 'V'), ('Xe bus', 'N_sub'), -1, 0), ('amod', ('Xe bus', 'N_sub'), ('nào', 'WH'), 0, 1), ('dobj', ('đến', 'V'), ('thành phố Hồ Chí Minh', 'Name'), 2, 3)]]
     for x in rule:
         gr = GrammaticalRelation(x)
         res = gr.convertFromDep()
