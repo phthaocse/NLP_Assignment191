@@ -35,7 +35,8 @@ class LogicalForm():
                 component = '(' + ' '.join(y for y in x) + ')'               
             rest.append(component)
         res_str = '(' + self.logic_form['type'] +  ':(&' + ''.join(com for com in rest) + '))'
-        print(res_str)
+        #print(res_str)
+        return res_str
 
 
 def test():

@@ -1,0 +1,18 @@
+Xe bus nào đến thành phố Huế lúc 20:00HR?
+(s1 PRED DEN)(s1 TNS PRE)
+(s1 LSUBJ XEBUS)
+(s1 LSUBJ XEBUS)(NAME w1 WH_BUS)
+(s1 LOBJ THANHPHO(NAME h1 "HUE"))
+(s1 ATIME 20:00HR)
+Thời gian xe bus B3 từ Đà Nẵng đến Huế?
+(s1 PRED DEN)(s1 TNS PRE)
+(s1 LSUBJ XEBUS)
+(s1 LSUBJ XEBUS(NAME b3 "B3"))
+(s1 FROM_LOC THANHPHO(NAME d1 "DANANG"))
+(s1 RUN_TIME WH)
+(s1 LOBJ THANHPHO(NAME h1 "HUE"))
+Xe bus nào đến thành phố Hồ Chí Minh ?
+(s1 PRED DEN)(s1 TNS PRE)
+(s1 LSUBJ XEBUS)
+(s1 LSUBJ XEBUS)(NAME w1 WH_BUS)
+(s1 LOBJ THANHPHO(NAME h1 "HCMC"))

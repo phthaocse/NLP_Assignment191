@@ -1,0 +1,6 @@
+Xe bus nào đến thành phố Huế lúc 20:00HR?
+(WH b:(&(XE_BUS b)(DEST b (NAME h1 "HUE"))(ATIME b 20:00HR)))
+Thời gian xe bus B3 từ Đà Nẵng đến Huế?
+(THE t:(&(XE BUS b3 (NAME b3 "B3"))(FROM_LOC b3 (NAME d1 "DANANG"))(RUN_TIME b3 t)(DEST b3 (NAME h1 "HUE"))))
+Xe bus nào đến thành phố Hồ Chí Minh ?
+(WH b:(&(XE_BUS b)(DEST b (NAME h1 "HCMC"))))

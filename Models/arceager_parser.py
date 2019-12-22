@@ -57,7 +57,7 @@ class ArcEagerParser():
                         order1 = -2
                         order2 = self.word_list.index(self.stack[-1])
                     self.relation += [(rule,self.buffer[-1],self.stack.pop(),order1,order2)]
-                    print('leftarc')
+                    #print('leftarc')
                     return True
         return False
     
@@ -66,7 +66,7 @@ class ArcEagerParser():
             if self.buffer[-1][0] not in [x[2] for x in self.relation]:#rightarc
                 isValid,rule = self.checkRule(self.stack[-1],self.buffer[-1])   
                 if isValid:
-                    print('rightarc')
+                    #print('rightarc')
                     wi = self.stack[-1]
                     wj = self.buffer.pop()
                     if rule == "nsubj":
@@ -85,23 +85,23 @@ class ArcEagerParser():
 
     def Reduce(self):
         if self.stack[-1] in [x[2] for x in self.relation] and self.stack[-1] != 'root':#reduce
-            print('reduce')
+            #print('reduce')
             self.stack.pop()
             return True
         return False
 
     def Shift(self):
-        print('shift')
+        #print('shift')
         self.stack.append(self.buffer.pop()) 
 
     def parsing(self):
-        print(self.buffer)
+        #print(self.buffer)
         while (self.buffer or len(self.stack) > 1):
-            print("-----------------------------------")
-            print(self.stack)
-            print(self.buffer)
-            print(self.relation)
-            print("-----------------------------------")
+            # print("-----------------------------------")
+            # print(self.stack)
+            # print(self.buffer)
+            # print(self.relation)
+            # print("-----------------------------------")
             if self.leftArc():
                 continue
             elif self.rightArc():
@@ -114,7 +114,6 @@ class ArcEagerParser():
         for x in self.relation:
             if x[0] == 'dobj':
                 check = x[2]
-        print(check)
         for y in self.relation:
             if y[0] == 'nmod' and y[2] == check:
                 idx = self.relation.index(y) 

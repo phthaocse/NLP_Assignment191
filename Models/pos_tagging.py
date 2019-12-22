@@ -1,11 +1,11 @@
-from pos_tag_dict import pos_tag_dict
+from . import pos_tag_dict
 import re
 import unicodedata as ud
 
 class PosTag():
     def __init__(self,word_list):
         self.word_list = word_list
-        self.dict = pos_tag_dict
+        self.dict = pos_tag_dict.pos_tag_dict
     
     def tagging(self):
         res = list()

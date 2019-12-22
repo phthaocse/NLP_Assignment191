@@ -1,6 +1,6 @@
 import re
 import unicodedata as ud
-from utils import loadDict 
+from . import utils
 
 
 
@@ -50,8 +50,8 @@ class Basetokenizer(object):
         return [token[0] for token in tokens]
 
 class Tokenizer(Basetokenizer):
-    def __init__(self,complex_words = 'complexwords.txt'):
-        self.complexWords = loadDict(complex_words)
+    def __init__(self,complex_words = 'Models/complexwords.txt'):
+        self.complexWords = utils.loadDict(complex_words)
 
     def tokenize(self,text):
         """
@@ -59,9 +59,7 @@ class Tokenizer(Basetokenizer):
         param text: input sentence
         return: array of words
         """
-        print(text)
         syllables = Tokenizer.syllablize(text)
-        print(syllables)
         syl_size = len(syllables)
         index = 0
         done = False
@@ -104,7 +102,6 @@ class Tokenizer(Basetokenizer):
         param syllables (output of tokenize)
         return new list of syllables
         """
-        print(syllables)
         special_word = ['thành phố']
         special_word_time = ['lúc','vào lúc','vào thời điểm','thời điểm']
         city_name = ['hồ chí minh', 'đà nẵng', 'huế', 'hà nội']
@@ -138,7 +135,5 @@ def test(sentence,expect_out):
     return res
 
 if __name__ == "__main__":
-    import sentence_test
+    from . import sentence_test
     res = test(sentence_test.sentence,sentence_test.expect_output)
-    for x in res:
-        print(x,'\n')

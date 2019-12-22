@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0,'../Output/')
-import db
+#sys.path.insert(0,'../Input/')
+from Input import db
 
 class ProceudalSematic():
     def __init__(self,logical_form):
@@ -41,7 +41,7 @@ class ProceudalSematic():
                         break
         return self.proc_sem    
 
-    def printSem(self):
+    def print_sem(self):
         buff = [] 
         buff += [self.proc_sem['type']]
         for x in self.proc_sem['rest']:
@@ -51,7 +51,7 @@ class ProceudalSematic():
                 tmp = '(' + ' '.join(item for item in x) + ')'
                 buff += [tmp]
         res_str = '(' + ''.join(item for item in buff) + ')'
-        print(res_str)
+        return res_str
 def test():
     test_list = [
         {'type': 'WH b', 'rest': [['XE_BUS', 'b'], ['DEST', 'b', ('NAME', 'h1', '"HUE"')], ['ATIME', 'b', '20:00HR']]},
@@ -62,7 +62,7 @@ def test():
         procedual = ProceudalSematic(x)
         res = procedual.get_proc_sem()
         print(res)
-        procedual.printSem()
+        procedual.print_sem()
 if __name__ == "__main__":
     test()
 

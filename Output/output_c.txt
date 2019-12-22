@@ -1,0 +1,6 @@
+Xe bus nào đến thành phố Huế lúc 20:00HR?
+(PRINT-ALL ?b(XE_BUS ?b)(ATIME ?b HUE 20:00HR))
+Thời gian xe bus B3 từ Đà Nẵng đến Huế?
+(FIND-THE  ?t(RUN-TIME B3 DANANG HUE ?t))
+Xe bus nào đến thành phố Hồ Chí Minh ?
+(PRINT-ALL ?b(XE_BUS ?b)(ATIME ?b HCMC ?t))

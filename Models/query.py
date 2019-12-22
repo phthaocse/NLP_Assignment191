@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0,'../Output/')
-import db
+sys.path.insert(0,'../Input/')
+from Input import db
 
 class Query():
     def __init__(self,proc_sem):

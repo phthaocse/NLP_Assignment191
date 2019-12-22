@@ -1,4 +1,4 @@
-from converEngdict import dict1
+from . import converEngdict
 
 class GrammaticalRelation():
 
@@ -24,6 +24,7 @@ class GrammaticalRelation():
     def rule2gm(self,rule):
         res = str()
         logi = ''
+        dict1 = converEngdict.dict1
         if rule[0] == 'ROOT':
             res = '(s1 PRED ' + dict1[rule[2][0].lower()].upper() + ')(s1 TNS PRE)'
         elif rule[0] == 'amod':
@@ -73,7 +74,9 @@ class GrammaticalRelation():
             main = self.rule2gm(self.dep_gram[int(idx)])
             res.append(main)
 
-        return res
+        return res,self.logic_form
+    
+
 
 def test():
     rule =  [[('ROOT', 'root', ('đến', 'V'), -2, 2), ('nsubj', ('đến', 'V'), ('Xe bus', 'N_sub'), -1, 0), ('amod', ('Xe bus', 'N_sub'), ('nào', 'WH'), 0, 1), ('dobj', ('đến', 'V'), ('thành phố Huế', 'Name'), 2, 3), ('nmod', ('đến', 'V'), ('20:00HR', 'Time'), 2, 5), ('case', ('thành phố Huế', 'Name'), ('lúc', 'P'), 3, 4)],
