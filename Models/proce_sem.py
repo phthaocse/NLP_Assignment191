@@ -28,9 +28,9 @@ class ProceudalSematic():
                     self.proc_sem['rest'] += [tmp]
                 elif x[0] == 'DEST':
                     idx = self.logical_form['rest'].index(x)
-                    for i in range(idx + 1,len(self.logical_form['rest']) - 1):
-                        if self.logical_form[i][0] == 'ATIME':
-                            check = (True,self.logical_form[i][2])
+                    for i in range(idx + 1,len(self.logical_form['rest'])):
+                        if self.logical_form['rest'][i][0] == 'ATIME':
+                            check = (True,self.logical_form['rest'][i][2])
                     if check:
                         tmp = ['ATIME','?' + x[1],x[2][2][1:-1],check[1]]
                         self.proc_sem['rest'] += [tmp]
@@ -61,6 +61,7 @@ def test():
     for x in test_list:
         procedual = ProceudalSematic(x)
         res = procedual.get_proc_sem()
+        print(res)
         procedual.printSem()
 if __name__ == "__main__":
     test()
